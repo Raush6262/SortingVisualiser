@@ -3,6 +3,7 @@ let array = [];
 let steps = [];
 let n;
 let isanimating = false;
+let currspeed=100;
 function fullreset() {
     array = [];
     document.getElementById("array-container").innerHTML = "";
@@ -56,12 +57,11 @@ function renderBars() {
     console.log("redering done ");
 }
 
-
-
-
 function bubblesort() {
     if (isanimating == false) {
         reset();
+        currspeed=document.getElementById("speedSlider").value;
+        console.log("speed is "+currspeed);
         isanimating = true;
         console.log("sorting ");
         let len = array.length;
@@ -102,7 +102,7 @@ function animateArray(i) {
             first.style.backgroundColor = "blue";
             second.style.backgroundColor = "blue";
             animateArray(i + 1);
-        }, 1);
+        }, currspeed);
 
     }
     if (i == steps.length) {
