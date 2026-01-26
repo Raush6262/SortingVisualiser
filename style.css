@@ -8,5 +8,6 @@ body{
     display: flex;
     align-items: flex-end;
     width: 80%;
+    height: 300px;
     border: 1px solid #ccc;
 }

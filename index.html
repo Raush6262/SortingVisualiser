@@ -11,12 +11,11 @@
     <div>
         <label for="inputnum">Input the numbers count here</label>
         <input id="inputnum" type="number" placeholder="0">
-        <button onclick="start()">enter</button>
+        <button id="generate-array" onclick="start()">Generate Array</button>
     </div>
     <div id="button-container">
-        <div id="generate-array"><button>Generate Array</button></div>
-        <div id="bubble"><button>Bubble Sort</button></div>
-        <div id="reset"><button>Reset</button></div>
+        <div id="bubble" onclick="bubblesort()"><button>Bubble Sort</button></div>
+        <div id="reset" onclick="fullreset()"><button>Reset</button></div>
     </div>
     <div id="array-container"></div>
     <script src="script.js"></script>
