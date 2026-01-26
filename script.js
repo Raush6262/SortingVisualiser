@@ -4,11 +4,15 @@ let steps = [];
 let n;
 let isanimating = false;
 let currspeed=100;
+
 function fullreset() {
     array = [];
     document.getElementById("array-container").innerHTML = "";
     steps = [];
+    isanimating=false;
+    currspeed=100;
 }
+
 function reset() {
     steps = [];
 }
@@ -80,9 +84,7 @@ function bubblesort() {
         console.log("sorted ");
         console.log(steps);
         animateArray(0);
-
     }
-
 }
 
 function animateArray(i) {
@@ -95,7 +97,6 @@ function animateArray(i) {
             swap(first, second);
         }
 
-
         setTimeout(function () {
             first.style.borderWidth = '2px';
             second.style.borderWidth = '2px';
@@ -103,7 +104,6 @@ function animateArray(i) {
             second.style.backgroundColor = "blue";
             animateArray(i + 1);
         }, currspeed);
-
     }
     if (i == steps.length) {
         isanimating = false;

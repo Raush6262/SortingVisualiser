@@ -7,21 +7,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <h1>Bubble Sort Visualizer</h1>
+
     <div>
         <label for="inputnum">Input the numbers count here</label>
         <input id="inputnum" type="number" placeholder="0">
         <button id="generate-array" onclick="start()">Generate Array</button>
     </div> 
+
     <div id="slider">
         <label for="speedSlider">Speed</label>
         <input id="speedSlider" type="range" min="1" max="1000" >
     </div>
+
     <div id="button-container">
         <div id="bubble" onclick="bubblesort()"><button>Bubble Sort</button></div>
         <div id="reset" onclick="fullreset()"><button>Reset</button></div>
     </div>
+
     <div id="array-container"></div>
+    
     <script src="script.js"></script>
 </body>
 </html>
