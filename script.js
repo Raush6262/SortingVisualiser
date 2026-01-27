@@ -110,6 +110,45 @@ function animateArray(i) {
     }
 }
 
+function selectionsort(){
+    if(isanimating==false){
+        isanimating=true;
+        reset();
+        currspeed=document.getElementById("speedSlider").value;
+        for(let i=0;i<array.length;i++){
+            let minimum=i;
+            for(let j=i+1;j<array.length;j++){
+                steps.push(['compare',j,minimum]);
+                if(array[j]<array[minimum]){
+                    minimum=j;
+                }
+            }
+            steps.push(["swap",i,minimum]);
+            [array[minimum],array[i]]=[array[i],array[minimum]];
+        }
+        animateArray(0);
+    }
+}
+
+function insertionsort(){
+    if(isanimating==false){
+        reset();
+        isanimating=true;
+        for(let i=0;i<array.length-1;i++){
+            for(let j=i+1;j>0;j--){
+                steps.push(["compare",j,j-1]);
+                if(array[j]<array[j-1]){
+                    steps.push(["swap",j,j-1]);
+                    [array[j],array[j-1]]=[array[j-1],array[j]];
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        animateArray(0);
+    }
+}
 function swap(first, second) {
     {
         first.style.backgroundColor = "Red";

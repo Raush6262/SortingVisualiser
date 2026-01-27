@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <h1>Bubble Sort Visualizer</h1>
+    <h1>Sorting Alorithm Visualizer</h1>
 
     <div>
         <label for="inputnum">Input the numbers count here</label>
@@ -23,8 +23,17 @@
 
     <div id="button-container">
         <div id="bubble" onclick="bubblesort()"><button>Bubble Sort</button></div>
-        <div id="reset" onclick="fullreset()"><button>Reset</button></div>
     </div>
+
+    <div id="button-container">
+        <div id="selection" onclick="selectionsort()"><button>Selection Sort</button></div>
+    </div>
+
+    <div id="button-container">
+        <div id="insertion" onclick="insertionsort()"><button>Insertion Sort</button></div>
+    </div>
+
+    <div id="reset" onclick="fullreset()"><button>Reset</button></div>
 
     <div id="array-container"></div>
     
