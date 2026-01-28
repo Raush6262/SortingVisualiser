@@ -24,33 +24,19 @@
     <div id="dropdown">
         <label for="sort">Select the Technique</label>
         <select name="sorting techniques" id="sort">
-            <option value="bubble">Bubble Sort</option>
-            <option value="selection">Selection Sort</option>
-            <option value="insertion">Insertion Sort</option>
-            <option value="merge">Merge Sort</option>
-            <option value="quick">Quick Sort</option>
+            <option value="bubblesort">Bubble Sort</option>
+            <option value="selectionsort">Selection Sort</option>
+            <option value="insertionsort">Insertion Sort</option>
+            <option value="mergesort">Merge Sort</option>
+            <option value="quicksort">Quick Sort</option>
         </select>
     </div>
+
+    <div id="sort-button" onclick="sort()">
+        Sort the Bars
+        <button>Sort</button>
+    </div>
     
-    <div id="button-container">
-        <div id="bubble" onclick="bubblesort()"><button>Bubble Sort</button></div>
-    </div>
-
-    <div id="button-container">
-        <div id="selection" onclick="selectionsort()"><button>Selection Sort</button></div>
-    </div>
-
-    <div id="button-container">
-        <div id="insertion" onclick="insertionsort()"><button>Insertion Sort</button></div>
-    </div>
-
-    <div id="button-container">
-        <div id="merge" onclick="mergesort()"><button>Merge Sort</button></div>
-    </div>
-
-    <div id="button-container">
-        <div id="quick" onclick="quicksort()"><button>Quick Sort</button></div>
-    </div>
 
     <div id="reset" onclick="fullreset()"><button>Reset</button></div>
 

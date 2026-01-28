@@ -1,4 +1,5 @@
 console.log("connected");
+/*all correct don't touch*/
 let array = [];
 let steps = [];
 let n;
@@ -22,12 +23,9 @@ function generateArray() {
         array = [];
         reset();
         document.getElementById("array-container").innerHTML = "";
-        reset();
         n = Number(document.getElementById("inputnum").value);
         if (n > 0) {
-            console.log("n is " + n);
             createArray();
-            console.log("Array created ");
             renderBars();
         }
         else {
@@ -44,7 +42,6 @@ function createArray() {
 }
 
 function renderBars() {
-    console.log("Redering started ");
     for (let i = 0; i < array.length; i++) {
         var bar = document.createElement('div');
         bar.id = 'bar' + i;
@@ -52,21 +49,32 @@ function renderBars() {
         document.getElementById('array-container').appendChild(bar);
         bar.style.height = (array[i] + '%');
         bar.style.width = (1 / n * 100 + '%');
-        bar.style.borderWidth = "2px";
+        bar.style.borderWidth = "0.5px";
         bar.style.borderColor = "Black";
         bar.style.borderStyle = "Solid";
         bar.style.backgroundColor = "blue";
     }
-    console.log("redering done ");
+}
+/* all correct till here*/
+const functions={
+    bubblesort,
+    selectionsort,
+    mergesort,
+    quicksort,
+    insertionsort
+};
+
+function sort(){
+    if(isanimating==true)
+        return;
+    isanimating=true;
+    currspeed = document.getElementById("speedSlider").value;
+    reset();
+    let algo=document.getElementById("sort").value;
+    functions[algo]();
 }
 
 function bubblesort() {
-    if (isanimating == false) {
-        reset();
-        currspeed = document.getElementById("speedSlider").value;
-        console.log("speed is " + currspeed);
-        isanimating = true;
-        console.log("sorting ");
         let len = array.length;
         while (len > 0) {
             let temp = 0;
@@ -80,68 +88,10 @@ function bubblesort() {
             }
             len--;
         }
-        console.log("sorted ");
-        console.log(steps);
         animateArray(0);
-    }
-}
-
-function animateArrayMerge(i) {
-    if (i < steps.length) {
-        let index = document.getElementById("bar" + steps[i][1]);
-        console.log("working on " + index.id);
-        index.style.borderWidth = '5px';
-        if (steps[i][0] == "tomerge") {
-            index.style.backgroundColor = "yellow";
-        }
-        else if(steps[i][0]=="update"){
-            index.style.backgroundColor = "orange";
-            index.style.height = steps[i][2]+"%";
-        }
-        else{
-            index.style.backgroundColor = "blue";
-        }
-        setTimeout(function () {
-            console.log(index.id + " to update ");
-            index.style.borderWidth = '2px';
-            animateArrayMerge(i + 1);
-        }, currspeed);
-        console.log(index.id + "after ");
-    }
-    if (i == steps.length) {
-        isanimating = false;
-    }
-
-}
-
-function animateArray(i) {
-    if (i < steps.length) {
-        let first = document.getElementById("bar" + steps[i][1]);
-        let second = document.getElementById("bar" + steps[i][2]);
-        first.style.borderWidth = '5px';
-        second.style.borderWidth = '5px';
-        if (steps[i][0] === "swap") {
-            swap(first, second);
-        }
-        console.log(first.id+" "+second.id);
-        setTimeout(function () {
-            first.style.borderWidth = '2px';
-            second.style.borderWidth = '2px';
-            first.style.backgroundColor = "blue";
-            second.style.backgroundColor = "blue";
-            animateArray(i + 1);
-        }, currspeed);
-    }
-    if (i == steps.length) {
-        isanimating = false;
-    }
 }
 
 function selectionsort() {
-    if (isanimating == false) {
-        isanimating = true;
-        reset();
-        currspeed = document.getElementById("speedSlider").value;
         for (let i = 0; i < array.length; i++) {
             let minimum = i;
             for (let j = i + 1; j < array.length; j++) {
@@ -154,14 +104,9 @@ function selectionsort() {
             [array[minimum], array[i]] = [array[i], array[minimum]];
         }
         animateArray(0);
-    }
 }
 
 function insertionsort() {
-    if (isanimating == false) {
-        reset();
-        isanimating = true;
-        currspeed = document.getElementById("speedSlider").value;
         for (let i = 0; i < array.length - 1; i++) {
             for (let j = i + 1; j > 0; j--) {
                 steps.push(["compare", j, j - 1]);
@@ -175,18 +120,11 @@ function insertionsort() {
             }
         }
         animateArray(0);
-    }
 }
 
 function mergesort() {
-    if (isanimating == false) {
-        isanimating = true;
-        reset();
         let i = 0, j = array.length - 1;
-        currspeed = document.getElementById("speedSlider").value;
         breakarray(array, i, j);
-    }
-    console.log("sorted");
     animateArrayMerge(0);
 }
 
@@ -210,8 +148,6 @@ function merge(array, i, mid, j) {
         steps.push(["tomerge", temp]);
         b.push(array[temp]);
     }
-    console.log(a);
-    console.log(b);
     let temp1 = i;
     let temp2 = 0;
     let temp3 = 0;
@@ -254,21 +190,14 @@ function merge(array, i, mid, j) {
 }
 
 function quicksort(){
-    if(isanimating==false){
-        isanimating=true;
-        reset();
-        currspeed=document.getElementById("speedSlider").value;
         let i=0,j=array.length-1;
         qsort(array,i,j);
-    }
     animateArray(0);
 }
 
 function qsort(array,i,j){
-    console.log("sorting for i "+i+" j "+j);
     if(i<j){
         let pivot=partition(array,i,j);
-        console.log("pivot is "+pivot);
         qsort(array,i,pivot-1);
         qsort(array,pivot+1,j);
     }
@@ -291,6 +220,54 @@ function partition(array,i,j){
     steps.push(["swap",temp1,j]);
     [array[j],array[temp1]]=[array[temp1],array[j]];
     return temp1;
+}
+//done
+
+function animateArrayMerge(i) {
+    if (i < steps.length) {
+        let index = document.getElementById("bar" + steps[i][1]);
+        index.style.borderWidth = '5px';
+        if (steps[i][0] == "tomerge") {
+            index.style.backgroundColor = "yellow";
+        }
+        else if(steps[i][0]=="update"){
+            index.style.backgroundColor = "orange";
+            index.style.height = steps[i][2]+"%";
+        }
+        else{
+            index.style.backgroundColor = "blue";
+        }
+        setTimeout(function () {
+            index.style.borderWidth = '2px';
+            animateArrayMerge(i + 1);
+        }, currspeed);
+    }
+    if (i == steps.length) {
+        isanimating = false;
+    }
+
+}
+
+function animateArray(i) {
+    if (i < steps.length) {
+        let first = document.getElementById("bar" + steps[i][1]);
+        let second = document.getElementById("bar" + steps[i][2]);
+        first.style.borderWidth = '5px';
+        second.style.borderWidth = '5px';
+        if (steps[i][0] === "swap") {
+            swap(first, second);
+        }
+        setTimeout(function () {
+            first.style.borderWidth = '2px';
+            second.style.borderWidth = '2px';
+            first.style.backgroundColor = "blue";
+            second.style.backgroundColor = "blue";
+            animateArray(i + 1);
+        }, currspeed);
+    }
+    if (i == steps.length) {
+        isanimating = false;
+    }
 }
 
 function swap(first, second) {
