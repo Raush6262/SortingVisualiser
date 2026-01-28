@@ -278,7 +278,7 @@ function qsort(array,i,j){
 function partition(array,i,j){
     let temp1=i,temp2=i;
     while(temp2<j){
-        steps.push(["comparing ",temp2,j]);
+        steps.push(["compare",temp2,j]);
         if(array[temp2]<array[j]){
             steps.push(["swap",temp1,temp2]);
             [array[temp1],array[temp2]]=[array[temp2],array[temp1]];
