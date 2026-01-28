@@ -124,7 +124,7 @@ function animateArray(i) {
         if (steps[i][0] === "swap") {
             swap(first, second);
         }
-
+        console.log(first.id+" "+second.id);
         setTimeout(function () {
             first.style.borderWidth = '2px';
             second.style.borderWidth = '2px';
@@ -252,6 +252,46 @@ function merge(array, i, mid, j) {
             
         }
     }
+}
+
+function quicksort(){
+    if(isanimating==false){
+        isanimating=true;
+        reset();
+        currspeed=document.getElementById("speedSlider").value;
+        let i=0,j=array.length-1;
+        qsort(array,i,j);
+    }
+    animateArray(0);
+}
+
+function qsort(array,i,j){
+    console.log("sorting for i "+i+" j "+j);
+    if(i<j){
+        let pivot=partition(array,i,j);
+        console.log("pivot is "+pivot);
+        qsort(array,i,pivot-1);
+        qsort(array,pivot+1,j);
+    }
+}
+
+function partition(array,i,j){
+    let temp1=i,temp2=i;
+    while(temp2<j){
+        steps.push(["comparing ",temp2,j]);
+        if(array[temp2]<array[j]){
+            steps.push(["swap",temp1,temp2]);
+            [array[temp1],array[temp2]]=[array[temp2],array[temp1]];
+            temp1++;
+            temp2++;
+        }
+        else{
+            temp2++;
+        }
+    }
+    steps.push(["swap",temp1,j]);
+    [array[j],array[temp1]]=[array[temp1],array[j]];
+    return temp1;
 }
 
 function swap(first, second) {
