@@ -9,11 +9,11 @@
 <body>
 
     <h1>Sorting Alorithm Visualizer</h1>
-
+    
     <div>
         <label for="inputnum">Input the numbers count here</label>
         <input id="inputnum" type="number" placeholder="0">
-        <button id="generate-array" onclick="start()">Generate Array</button>
+        <button id="generate-array" onclick="generateArray()">Generate Array</button>
     </div> 
 
     <div id="slider">
@@ -21,6 +21,17 @@
         <input id="speedSlider" type="range" min="1" max="1000" >
     </div>
 
+    <div id="dropdown">
+        <label for="sort">Select the Technique</label>
+        <select name="sorting techniques" id="sort">
+            <option value="bubble">Bubble Sort</option>
+            <option value="selection">Selection Sort</option>
+            <option value="insertion">Insertion Sort</option>
+            <option value="merge">Merge Sort</option>
+            <option value="quick">Quick Sort</option>
+        </select>
+    </div>
+    
     <div id="button-container">
         <div id="bubble" onclick="bubblesort()"><button>Bubble Sort</button></div>
     </div>

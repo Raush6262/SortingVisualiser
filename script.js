@@ -17,10 +17,10 @@ function reset() {
     steps = [];
 }
 
-function start() {
+function generateArray() {
     if (isanimating == false) {
-        isanimating = true;
         array = [];
+        reset();
         document.getElementById("array-container").innerHTML = "";
         reset();
         n = Number(document.getElementById("inputnum").value);
@@ -33,7 +33,6 @@ function start() {
         else {
             alert("error ");
         }
-        isanimating = false;
     }
 
 }
