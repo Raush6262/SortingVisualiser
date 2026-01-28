@@ -32,7 +32,6 @@ function generateArray() {
             alert("error ");
         }
     }
-
 }
 
 function createArray() {
@@ -79,9 +78,9 @@ function bubblesort() {
         while (len > 0) {
             let temp = 0;
             while (temp < len - 1) {
-                steps.push(["compare", temp, temp + 1]);
+                steps.push(["compare", temp, temp + 1, null]);
                 if (array[temp] > array[temp + 1]) {
-                    steps.push(["swap", temp, temp + 1]);
+                    steps.push(["swap", temp, temp + 1, null]);
                     [array[temp], array[temp + 1]] = [array[temp + 1], array[temp]];
                 }
                 temp++;
@@ -95,12 +94,12 @@ function selectionsort() {
         for (let i = 0; i < array.length; i++) {
             let minimum = i;
             for (let j = i + 1; j < array.length; j++) {
-                steps.push(['compare', j, minimum]);
+                steps.push(['compare', j, minimum, null]);
                 if (array[j] < array[minimum]) {
                     minimum = j;
                 }
             }
-            steps.push(["swap", i, minimum]);
+            steps.push(["swap", i, minimum, null]);
             [array[minimum], array[i]] = [array[i], array[minimum]];
         }
         animateArray(0);
@@ -109,9 +108,9 @@ function selectionsort() {
 function insertionsort() {
         for (let i = 0; i < array.length - 1; i++) {
             for (let j = i + 1; j > 0; j--) {
-                steps.push(["compare", j, j - 1]);
+                steps.push(["compare", j, j - 1, null]);
                 if (array[j] < array[j - 1]) {
-                    steps.push(["swap", j, j - 1]);
+                    steps.push(["swap", j, j - 1, null]);
                     [array[j], array[j - 1]] = [array[j - 1], array[j]];
                 }
                 else {
@@ -125,7 +124,7 @@ function insertionsort() {
 function mergesort() {
         let i = 0, j = array.length - 1;
         breakarray(array, i, j);
-    animateArrayMerge(0);
+    animateArray(0);
 }
 
 function breakarray(array, i, j) {
@@ -141,11 +140,11 @@ function merge(array, i, mid, j) {
     let a = [];
     let b = [];
     for (let temp = i; temp <= mid; temp++) {
-        steps.push(["tomerge", temp]);
+        steps.push(["tomerge", temp, null, null]);
         a.push(array[temp]);
     }
     for (let temp = mid + 1; temp <= j; temp++) {
-        steps.push(["tomerge", temp]);
+        steps.push(["tomerge", temp, null, null]);
         b.push(array[temp]);
     }
     let temp1 = i;
@@ -153,15 +152,15 @@ function merge(array, i, mid, j) {
     let temp3 = 0;
     while (temp2 < a.length && temp3 < b.length) {
         if (a[temp2] < b[temp3]) {
-            steps.push(["update", temp1, a[temp2]]); 
-            steps.push(["done",temp1]);
+            steps.push(["update", temp1, null, a[temp2]]); 
+            steps.push(["done",temp1, null, null]);
             array[temp1] = a[temp2];
             temp1++;
             temp2++;
         }
         else {
-            steps.push(["update", temp1, b[temp3]]);
-            steps.push(["done",temp1]);
+            steps.push(["update", temp1,null, b[temp3]]);
+            steps.push(["done", temp1, null, null]);
             array[temp1] = b[temp3];
             temp1++;
             temp3++;
@@ -170,8 +169,8 @@ function merge(array, i, mid, j) {
     }
     if (temp2 == a.length) {
         while (temp3 < b.length) {
-            steps.push(["update", temp1, b[temp3]]);
-            steps.push(["done",temp1]);
+            steps.push(["update", temp1, null, b[temp3]]);
+            steps.push(["done",temp1,null,null]);
             array[temp1] = b[temp3];
             temp1++;
             temp3++;
@@ -179,8 +178,8 @@ function merge(array, i, mid, j) {
     }
     if (temp3 == b.length) {
         while (temp2 < a.length) {
-            steps.push(["update", temp1, a[temp2]]);
-            steps.push(["done",temp1]);
+            steps.push(["update", temp1, null, a[temp2]]);
+            steps.push(["done",temp1,null,null]);
             array[temp1] = a[temp2];
             temp1++;
             temp2++;
@@ -206,9 +205,9 @@ function qsort(array,i,j){
 function partition(array,i,j){
     let temp1=i,temp2=i;
     while(temp2<j){
-        steps.push(["compare",temp2,j]);
+        steps.push(["compare",temp2,j,null]);
         if(array[temp2]<array[j]){
-            steps.push(["swap",temp1,temp2]);
+            steps.push(["swap",temp1,temp2,null]);
             [array[temp1],array[temp2]]=[array[temp2],array[temp1]];
             temp1++;
             temp2++;
@@ -217,51 +216,41 @@ function partition(array,i,j){
             temp2++;
         }
     }
-    steps.push(["swap",temp1,j]);
+    steps.push(["swap",temp1,j,null]);
     [array[j],array[temp1]]=[array[temp1],array[j]];
     return temp1;
-}
-//done
-
-function animateArrayMerge(i) {
-    if (i < steps.length) {
-        let index = document.getElementById("bar" + steps[i][1]);
-        index.style.borderWidth = '5px';
-        if (steps[i][0] == "tomerge") {
-            index.style.backgroundColor = "yellow";
-        }
-        else if(steps[i][0]=="update"){
-            index.style.backgroundColor = "orange";
-            index.style.height = steps[i][2]+"%";
-        }
-        else{
-            index.style.backgroundColor = "blue";
-        }
-        setTimeout(function () {
-            index.style.borderWidth = '2px';
-            animateArrayMerge(i + 1);
-        }, currspeed);
-    }
-    if (i == steps.length) {
-        isanimating = false;
-    }
-
 }
 
 function animateArray(i) {
     if (i < steps.length) {
         let first = document.getElementById("bar" + steps[i][1]);
         let second = document.getElementById("bar" + steps[i][2]);
+        if(first!=null)
         first.style.borderWidth = '5px';
+        if(second!=null)
         second.style.borderWidth = '5px';
         if (steps[i][0] === "swap") {
             swap(first, second);
         }
+        else if(steps[i][0]=="tomerge"){
+            first.style.backgroundColor="yellow";
+        }
+        else if(steps[i][0]=="update"){
+            first.style.backgroundColor="orange";
+            first.style.height=steps[i][3]+"%";
+        }
+        else if(steps[i][0]=="done"){
+            first.style.backgroundColor="blue";
+        }
         setTimeout(function () {
-            first.style.borderWidth = '2px';
-            second.style.borderWidth = '2px';
-            first.style.backgroundColor = "blue";
-            second.style.backgroundColor = "blue";
+            if(first!=null){
+                first.style.borderWidth = '0.5px';
+                first.style.backgroundColor = "blue";
+            }
+            if(second!=null){
+                second.style.borderWidth = '0.5px';
+                second.style.backgroundColor = "blue";
+            }
             animateArray(i + 1);
         }, currspeed);
     }
