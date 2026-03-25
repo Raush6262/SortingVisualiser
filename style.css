@@ -1,13 +1,89 @@
-body{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* ===== RESET ===== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Inter", sans-serif;
 }
 
+body{
+    background:#f1f5f9;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    color:#1e293b;
+}
+
+/* ===== TITLE ===== */
+
+h1{
+    text-align:center;
+    padding:16px;
+    background:white;
+    font-size:30px;
+    font-weight:600;
+    border-bottom:1px solid #e2e8f0;
+}
+
+/* ===== CONTROL PANEL ===== */
+
+body > div:not(#array-container){
+    background:white;
+    padding:12px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+    border-bottom:1px solid #e2e8f0;
+}
+
+/* ===== INPUTS ===== */
+
+input[type="number"],
+select{
+    padding:8px 12px;
+    border-radius:6px;
+    border:1px solid #cbd5e1;
+    background:#f8fafc;
+}
+
+#speedSlider{
+    width:150px;
+}
+
+/* ===== BUTTONS ===== */
+
+button{
+    padding:8px 16px;
+    border:none;
+    border-radius:6px;
+    background:#2563eb;
+    color:white;
+    font-weight:500;
+    cursor:pointer;
+    transition:0.25s;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+/* ===== ARRAY AREA ===== */
+
 #array-container{
-    display: flex;
-    align-items: flex-end;
-    width: 80%;
-    height: 300px;
-    border: 1px solid #ccc;
+    flex:1;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    padding:25px;
+}
+
+/* ===== BARS ===== */
+
+.blocks{
+    background:linear-gradient(to top,#14b8a6,#5eead4);
+    border:1px solid #e2e8f0;
+    transition:height .25s, background .25s;
 }
